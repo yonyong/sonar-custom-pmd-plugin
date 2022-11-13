@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+
+	<code-fragment id="handle-code"><![CDATA[
+public class MyFirstTestRuleTestObj {
+
+    public boolean CompliantEquals(OrgInfo orgInfo){
+        return "NJ001".toLowerCase().equals(orgInfo.getOrgCode().toLowerCase().trim());
+    }
+
+    class OrgInfo {
+        String orgCode;
+
+        public String getOrgCode() {
+            return orgCode;
+        }
+
+        public void setOrgCode(String orgCode) {
+            this.orgCode = orgCode;
+        }
+    }
+}
+
+    ]]>
+	</code-fragment>
+	<test-code>
+		<description>handle-code</description>
+		<expected-problems>0</expected-problems>
+		<code-ref id="handle-code" />
+	</test-code>
+
+
+  <code-fragment id="not-handle-code"><![CDATA[
+public class MyFirstTestRuleTestObj {
+
+    public boolean NonCompliantEquals(OrgInfo orgInfo){
+        return "NJ001".equals(orgInfo.getOrgCode());
+    }
+
+    class OrgInfo {
+        String orgCode;
+
+        public String getOrgCode() {
+            return orgCode;
+        }
+
+        public void setOrgCode(String orgCode) {
+            this.orgCode = orgCode;
+        }
+    }
+}
+
+    ]]>
+  </code-fragment>
+
+  <test-code>
+    <description>not-handle-code</description>
+    <expected-problems>1</expected-problems>
+    <expected-linenumbers>3</expected-linenumbers>
+    <code-ref id="not-handle-code" />
+  </test-code>
+</test-data>

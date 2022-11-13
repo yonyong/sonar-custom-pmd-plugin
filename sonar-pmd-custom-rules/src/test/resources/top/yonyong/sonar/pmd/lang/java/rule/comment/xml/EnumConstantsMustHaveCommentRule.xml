@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+
+	<code-fragment id="enum-without-comment"><![CDATA[
+public enum Level {
+    HIGH, MEDIUM, LOW
+}
+    ]]>
+	</code-fragment>
+
+	<test-code>
+		<description>Enum without Comment.</description>
+		<expected-problems>1</expected-problems>
+		<expected-linenumbers>1</expected-linenumbers>
+		<code-ref id="enum-without-comment" />
+	</test-code>
+
+
+	<code-fragment id="enum-with-comment"><![CDATA[
+public enum Level {
+    /**
+     * high, medium and low
+     */
+    HIGH, MEDIUM, LOW
+}
+    ]]>
+	</code-fragment>
+	<test-code>
+		<description>Enum with comment.</description>
+		<expected-problems>0</expected-problems>
+		<code-ref id="enum-with-comment" />
+	</test-code>
+
+</test-data>

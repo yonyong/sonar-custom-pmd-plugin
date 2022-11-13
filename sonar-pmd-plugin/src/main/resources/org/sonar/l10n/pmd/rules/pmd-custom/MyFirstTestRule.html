@@ -1,0 +1,8 @@
+方法名不能为 'NoCompliantEquals'. Example :
+<pre>
+public abstract class Foo { // should be AbstractFoo
+}
+   public boolean NoCompliantEquals(OrgInfo orgInfo){
+        return "NJ001".toLowerCase().equals(orgInfo.getOrgCode().toLowerCase().trim());
+    }
+  </pre>

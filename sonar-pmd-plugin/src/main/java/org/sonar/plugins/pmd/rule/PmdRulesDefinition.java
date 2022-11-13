@@ -67,6 +67,9 @@ public final class PmdRulesDefinition implements RulesDefinition {
 
         // p3c
         extractRulesData(repository, "/org/sonar/plugins/pmd/rules-p3c.xml", "/org/sonar/l10n/pmd/rules/pmd-p3c");
+
+        // custom
+        extractRulesData(repository, "/org/sonar/plugins/pmd/rules-custom.xml", "/org/sonar/l10n/pmd/rules/pmd-custom");
         repository.done();
     }
 

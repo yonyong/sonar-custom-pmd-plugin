@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+
+	<code-fragment id="use-right-case-for-date-format"><![CDATA[
+		import java.text.SimpleDateFormat;
+		class DateFormatTest {
+        public void test(){
+            SimpleDateFormat format = new SimpleDateFormat("YYYYMMDD"); //vio
+            format = new SimpleDateFormat("yyyy/MM/dd");
+            format = new SimpleDateFormat("yyyy-MM-dd");
+            format = new SimpleDateFormat("yyyymmdd");
+            format = new SimpleDateFormat("yyyy-MM-DD");
+            format = new SimpleDateFormat("yy-MM-DD");
+            format = new SimpleDateFormat("YY-MM-DD");
+            format = new SimpleDateFormat("YYmd");
+            format = new SimpleDateFormat("YYYY-M-d");
+            format = new SimpleDateFormat("YYYY-dd");
+
+        }
+    }
+    ]]>
+	</code-fragment>
+
+	<test-code>
+		<description>Use right case to format date</description>
+		<expected-problems>5</expected-problems>
+		<expected-linenumbers>4,10,11,12,13</expected-linenumbers>
+		<code-ref id="use-right-case-for-date-format" />
+	</test-code>
+
+</test-data>

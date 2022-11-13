@@ -1,0 +1,28 @@
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+
+    <code-fragment id="IbatisMethodQueryForListRule">
+        <![CDATA[
+      import com.ibatis.sqlmap.client.SqlMapClient;
+public class IStudentDaoImpl implements IStudentDao {
+	 private static final SqlMapClient sqlMapClient = new SqlMapClient();
+	 private List<Student> students = sqlMapClient.queryForList("student",1,10);
+     public List<Student> queryStudentByName(String name) {
+        List<Student> students = new SqlMapClient().queryForList("student",1,10);
+        return students;
+     }
+     public List<Teacher> queryStudentByName(String name) {
+        List<Teacher> teachers = sqlMapClient.queryForList("teacher",1,10);
+        return teachers;
+     }
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>should not use ibatis method queryForList</description>
+        <expected-problems>2</expected-problems>
+        <expected-linenumbers>4,10</expected-linenumbers>
+        <code-ref id="IbatisMethodQueryForListRule"/>
+    </test-code>
+</test-data>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+    <code-fragment id="AbstractNamingRuleStartWithabstract">
+        <![CDATA[
+public abstract class abstractNameRuleTest {
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>abstract class name should start with Abstract or Base</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>1</expected-linenumbers>
+        <code-ref id="AbstractNamingRuleStartWithabstract" />
+    </test-code>
+
+    <code-fragment id="AbstractNamingRuleStartWithAbstract">
+        <![CDATA[
+public abstract class AbstractNameRuleTest {
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>abstract class name should start with Abstract or Base</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="AbstractNamingRuleStartWithAbstract" />
+    </test-code>
+
+    <code-fragment id="AbstractNamingRuleStartWithBase">
+        <![CDATA[
+public abstract class BaseAbstractNameRuleTest {
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>abstract class name should start with Abstract or Base</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="AbstractNamingRuleStartWithBase" />
+    </test-code>
+
+    <code-fragment id="AbstractNamingRuleStartWithbase">
+        <![CDATA[
+public abstract class baseAbstractNameRuleTest {
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>abstract class name should start with Abstract or Base</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>1</expected-linenumbers>
+        <code-ref id="AbstractNamingRuleStartWithbase" />
+    </test-code>
+</test-data>

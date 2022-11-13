@@ -1,0 +1,34 @@
+<test-data xmlns="http://pmd.sourceforge.net/rule-tests"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests https://pmd.sourceforge.io/rule-tests_1_0_0.xsd">
+    <code-fragment id="AvoidStartWithDollarAndUnderLine">
+        <![CDATA[
+public class AvoidStartWithDollarAndUnderLineNamingRuleTest {
+    private String $1;
+    private String _1;
+    public void $sayHello(){}
+    public void _sayHello(){}
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>name should not be start with $ and _</description>
+        <expected-problems>4</expected-problems>
+        <expected-linenumbers>2,3,4,5</expected-linenumbers>
+        <code-ref id="AvoidStartWithDollarAndUnderLine"></code-ref>
+    </test-code>
+
+    <code-fragment id="AvoidStartWithDollarAndUnderLine1">
+        <![CDATA[
+public class AvoidStartWithDollarAndUnderLineNamingRuleTest {
+    private String s;
+    public void sayHello(){}
+}
+    ]]>
+    </code-fragment>
+    <test-code>
+        <description>name should not be start with $ and _</description>
+        <expected-problems>0</expected-problems>
+        <code-ref id="AvoidStartWithDollarAndUnderLine1" />
+    </test-code>
+</test-data>

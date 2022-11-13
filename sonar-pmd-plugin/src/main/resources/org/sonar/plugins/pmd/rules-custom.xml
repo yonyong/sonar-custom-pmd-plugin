@@ -1,0 +1,7 @@
+<rules>
+    <!--custom-->
+  <rule key="MyFirstTestRule">
+    <priority>MAJOR</priority>
+    <configKey><![CDATA[rulesets/java/custom.xml/MyFirstTestRule]]></configKey>
+  </rule>
+</rules>
