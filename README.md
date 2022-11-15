@@ -21,13 +21,13 @@ sonar-pmd-plugin模块负责集成sonar-pmd-custom-rules模块，打包生成son
 如果不需要额外定义规则集，从[2.开发一个自定义规则](#idname)开始即可。
 # 1. 自定义规则集
 ```$xslt
-project: sonar-pmd-custom-rules
+模块: sonar-pmd-custom-rules
 
-1. add custom.xml after ali-set.xml in /resources/rulesets/java
-2. edit pom.xml,add ruleset,as: 
+1. 在/resources/rulesets/java下的ali-set.xml后面新增一个文件 custom.xm
+2. 修改pom文件，添加规则集：
 <ruleset...</ruleset>
 <ruleset>rulesets/java/custom.xml</ruleset>
-3. edit pom.xml,add dependency in plugin, the snippet of code is finally:
+3. 修改pom文件,在插件中添加依赖, 代码片段如下:
 <dependencies>
   <dependency>
     <groupId>com.alibaba.p3c</groupId>
@@ -40,38 +40,38 @@ project: sonar-pmd-custom-rules
     <version>1.0.0</version>
   </dependency>
 </dependencies>
-4. edit pom.xml,comment out gpg plugin
-5. maven run: clean install
+4. 修改pom文件，注释掉gpg插件
+5. 执行maven命令: clean install 规则集添加完成。
 ```
 # <a href="#idname">2.开发一个自定义规则</a>
 
 ```$xslt
-project: sonar-pmd-custom-rules
+模块: sonar-pmd-custom-rules
 
-1. add Rule like top.yonyong.sonar.pmd.lang.java.rule.custom.MyFirstTestRule
-2. add report err message in src\main\resources\messages.xml and messages_en.xml
-3. register rule in src\main\resources\rulesets\java\custom.xml
+1. 添加一个自定义规则，例如：top.yonyong.sonar.pmd.lang.java.rule.custom.MyFirstTestRule
+2. 在 src\main\resources\messages.xml 和 messages_en.xml文件中，新增规则校验失败后报告的信息
+3. 在src\main\resources\rulesets\java\custom.xml中注册自定义的规则
 ```
 # 3.测试你的规则
 
 ```$xslt
-project: sonar-pmd-custom-rules
+模块: sonar-pmd-custom-rules
 
-1. add test class like test/src/java/top.yonyong.sonar.pmd.lang.java.rule.custom.MyFirstTestRuleTest
-2. add target test xml: src\test\resources\top\yonyong\sonar\pmd\lang\java\rule\custom\xml\MyFirstTestRule.xml
-3. edit your test case in test xml
-4. test it ! 
+1. 在 test/src/java/下添加一个测试类，例如：top.yonyong.sonar.pmd.lang.java.rule.custom.MyFirstTestRuleTest
+2. 添加一个测试对象xml：src\test\resources\top\yonyong\sonar\pmd\lang\java\rule\custom\xml\MyFirstTestRule.xml
+3. 在上一步的测试xml中，编写测试用例、预期结果
+4. 执行测试
 ```
 # 4.在sonar中导入你的规则
 
 ```$xslt
-project: sonar-pmd-custom-rules
-1. execute command: mvn clean insall
+模块: sonar-pmd-custom-rules
+1. 执行maven命令: mvn clean insall
 
-project: sonar-pmd-plugin
-2. add rule in src\main\resources\org\sonar\plugins\pmd\rules-custom.xml
-3. register ruleName in src\main\resources\org\sonar\l10n\pmd.properties
-4. execute command: mvn clean package
-5. add jar in sonar plugin dir(extensions/plugins/)
-6. restart sonar
+模块: sonar-pmd-plugin
+2. 在 src\main\resources\org\sonar\plugins\pmd\rules-custom.xml中添加自定义的规则
+3. 在src\main\resources\org\sonar\l10n\pmd.properties中注册规则名称
+4. 执行maven命令: mvn clean package
+5. 将打包出来的jar包上传至sonar插件目录下(extensions/plugins/)
+6. 重启sonar
 ```

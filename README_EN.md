@@ -21,7 +21,7 @@ The sonar-pmd-plugin module is responsible for integrating the sonar-pmd-custom-
 If you do not need to define additional rule sets, start with [2.develop a rule](idname).
 # 1.custom ruleSets
 ```$xslt
-project: sonar-pmd-custom-rules
+module: sonar-pmd-custom-rules
 
 1. add custom.xml after ali-set.xml in /resources/rulesets/java
 2. edit pom.xml,add ruleset,as: 
@@ -46,7 +46,7 @@ project: sonar-pmd-custom-rules
 # <a href="#idname">2.develop a rule</a>
 
 ```$xslt
-project: sonar-pmd-custom-rules
+module: sonar-pmd-custom-rules
 
 1. add Rule like top.yonyong.sonar.pmd.lang.java.rule.custom.MyFirstTestRule
 2. add report err message in src\main\resources\messages.xml and messages_en.xml
@@ -55,7 +55,7 @@ project: sonar-pmd-custom-rules
 # 3.test your rule
 
 ```$xslt
-project: sonar-pmd-custom-rules
+module: sonar-pmd-custom-rules
 
 1. add test class like test/src/java/top.yonyong.sonar.pmd.lang.java.rule.custom.MyFirstTestRuleTest
 2. add target test xml: src\test\resources\top\yonyong\sonar\pmd\lang\java\rule\custom\xml\MyFirstTestRule.xml
@@ -65,10 +65,10 @@ project: sonar-pmd-custom-rules
 # 4.add rule in plugin
 
 ```$xslt
-project: sonar-pmd-custom-rules
+module: sonar-pmd-custom-rules
 1. execute command: mvn clean insall
 
-project: sonar-pmd-plugin
+module: sonar-pmd-plugin
 2. add rule in src\main\resources\org\sonar\plugins\pmd\rules-custom.xml
 3. register ruleName in src\main\resources\org\sonar\l10n\pmd.properties
 4. execute command: mvn clean package
