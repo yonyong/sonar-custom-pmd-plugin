@@ -1,4 +1,4 @@
-*_[EN](https://github.com/yonyong/sonar-java-custom-plugin/blob/master/README_EN.md) | 中文_*
+*_[EN](https://github.com/yonyong/sonar-custom-pmd-plugin/blob/master/README_EN.md) | 中文_*
 # 前言
 ## - 项目
 自定义sonarPMD插件-骨架

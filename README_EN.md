@@ -1,4 +1,4 @@
-*_EN | [中文](https://gitee.com/yonyong/spring-cache-plus/blob/master/README.md)_*
+*_EN | [中文](https://github.com/yonyong/sonar-custom-pmd-plugin/blob/master/README.md)_*
 # Preface
 ## - Project
 Custom sonar PMD plugin - arch
