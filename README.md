@@ -1,38 +1,77 @@
-拷贝 [sonar-pmd-plugin](https://github.com/jensgerdes/sonar-pmd/tree/master)
+*_[EN](https://github.com/yonyong/sonar-java-custom-plugin/blob/master/README_EN.md) | 中文_*
+# 前言
+## - 项目
+自定义sonarPMD插件-骨架
+## - 介绍
+目前sonar基于各版本的自定义PMD插件兼容性不太理想。
+因此，针对7.9版本sonar实现了一个自定义sonarPMD插件的骨架项目。  
+主要基于下面两个项目进行源码修改：  
+https://github.com/alibaba/p3c/tree/master/p3c-pmd  
+https://github.com/jborgers/sonar-pmd/tree/master
+## - 适用版本
+sonar版本7.9
+## - 模块介绍
+integration-test 集成测试模块  
+sonar-pmd-custom-rules 自定义规则模块  
+sonar-pmd-plugin 生成sonar插件模块
+## - 其他
+sonar-pmd-custom-rules模块负责自定义sonar规则，规则编写验证完毕后，install到本地仓。  
+sonar-pmd-plugin模块负责集成sonar-pmd-custom-rules模块，打包生成sonar插件。
 
-添加对阿里p3c的支持
+如果不需要额外定义规则集，从[2.开发一个自定义规则](#idname)开始即可。
+# 1. 自定义规则集
+```$xslt
+project: sonar-pmd-custom-rules
 
-sonarQube版本 7.7+
+1. add custom.xml after ali-set.xml in /resources/rulesets/java
+2. edit pom.xml,add ruleset,as: 
+<ruleset...</ruleset>
+<ruleset>rulesets/java/custom.xml</ruleset>
+3. edit pom.xml,add dependency in plugin, the snippet of code is finally:
+<dependencies>
+  <dependency>
+    <groupId>com.alibaba.p3c</groupId>
+    <artifactId>p3c-pmd</artifactId>
+    <version>2.0.1</version>
+  </dependency>
+  <dependency>
+    <groupId>top.yonyong</groupId>
+    <artifactId>sonar-pmd-custom-rules</artifactId>
+    <version>1.0.0</version>
+  </dependency>
+</dependencies>
+4. edit pom.xml,comment out gpg plugin
+5. maven run: clean install
+```
+# <a href="#idname">2.开发一个自定义规则</a>
 
-# SonarQube PMD Plugin [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.sonarsource.pmd/sonar-pmd-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.sonarsource.pmd/sonar-pmd-plugin) [![Build Status](https://api.travis-ci.org/jensgerdes/sonar-pmd.svg?branch=master)](https://travis-ci.org/jensgerdes/sonar-pmd) [![SonarStatus](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.pmd%3Asonar-pmd-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.pmd%3Asonar-pmd-plugin) [![SonarStatus](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.pmd%3Asonar-pmd-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=org.sonarsource.pmd%3Asonar-pmd-plugin)
-Sonar-PMD is a plugin that provides coding rules from [PMD](https://pmd.github.io/).
+```$xslt
+project: sonar-pmd-custom-rules
 
-## Description / Features
-PMD Plugin|2.0|2.1|2.2|2.3|2.4.1|2.5|2.6|3.0.0|3.1.x|3.2.x
--------|---|---|---|---|---|---|---|---|---|---
-PMD|4.3|4.3|5.1.1|5.2.1|5.3.1|5.4.0|5.4.2|5.4.2|6.9.0|6.10.0
-Max. supported Java Version | |  |  |  |  | 1.7 | 1.8 | 1.8 | 11 |
-Min. SonarQube Version |  |  |  |  |  | 4.5.4 | 4.5.4 | 6.6 | 6.6 |
+1. add Rule like top.yonyong.sonar.pmd.lang.java.rule.custom.MyFirstTestRule
+2. add report err message in src\main\resources\messages.xml and messages_en.xml
+3. register rule in src\main\resources\rulesets\java\custom.xml
+```
+# 3.测试你的规则
 
-A majority of the PMD rules have been rewritten in the Java plugin. Rewritten rules are marked "Deprecated" in the PMD plugin, but a [concise summary of replaced rules](http://dist.sonarsource.com/reports/coverage/pmd.html) is available.
+```$xslt
+project: sonar-pmd-custom-rules
 
-## Usage
-In the quality profile, activate some rules from PMD and run an analysis on your project.
-Set the sonar.java.source property to tell PMD which version of Java your source code complies to. The default value is 1.6. 
+1. add test class like test/src/java/top.yonyong.sonar.pmd.lang.java.rule.custom.MyFirstTestRuleTest
+2. add target test xml: src\test\resources\top\yonyong\sonar\pmd\lang\java\rule\custom\xml\MyFirstTestRule.xml
+3. edit your test case in test xml
+4. test it ! 
+```
+# 4.在sonar中导入你的规则
 
-Possible values: 
-- 1.4
-- 1.5 or 5 
-- 1.6 or 6 
-- 1.7 or 7 
-- 1.8 or 8
-- 9
-- 10
-- 11
+```$xslt
+project: sonar-pmd-custom-rules
+1. execute command: mvn clean insall
 
-## Rules on test
-PMD tool provides some rules that can check the code of JUnit tests. Please note that these rules (and only these rules) will be applied only on the test files of your project.
-
-## License
-Licensed under the [GNU Lesser General Public License, Version 3.0](https://github.com/jensgerdes/sonar-pmd/blob/master/LICENSE.md)
-
+project: sonar-pmd-plugin
+2. add rule in src\main\resources\org\sonar\plugins\pmd\rules-custom.xml
+3. register ruleName in src\main\resources\org\sonar\l10n\pmd.properties
+4. execute command: mvn clean package
+5. add jar in sonar plugin dir(extensions/plugins/)
+6. restart sonar
+```

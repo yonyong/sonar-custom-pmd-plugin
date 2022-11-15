@@ -1,4 +1,25 @@
-# custom rule
+*_EN | [中文](https://gitee.com/yonyong/spring-cache-plus/blob/master/README.md)_*
+# Preface
+## - Project
+Custom sonar PMD plugin - arch
+## - Introduction
+Currently sonar is not compatible with custom PMD plugins based on various versions.  
+Therefore, a skeleton project of custom sonar PMD plug-in has been implemented for version 7.9 of sonar.    
+Source code changes are mainly based on the following two projects:    
+https://github.com/alibaba/p3c/tree/master/p3c-pmd  
+https://github.com/jborgers/sonar-pmd/tree/master
+## - Suitable version
+sonar 7.9+
+## - Module Introduction
+integration-test:integration-test module  
+sonar-pmd-custom-rules:custom rule module    
+sonar-pmd-plugin:Generate the sonar plugin module
+## - Other
+sonar-pmd-custom-rules module is responsible for customizing sonar rules. After the rules are written and verified, install them into the local repository.    
+The sonar-pmd-plugin module is responsible for integrating the sonar-pmd-custom-rules module and packaging to generate the sonar plug-in.  
+
+If you do not need to define additional rule sets, start with [2.develop a rule](idname).
+# 1.custom ruleSets
 ```$xslt
 project: sonar-pmd-custom-rules
 
@@ -22,7 +43,7 @@ project: sonar-pmd-custom-rules
 4. edit pom.xml,comment out gpg plugin
 5. maven run: clean install
 ```
-# develop a rule
+# <a href="#idname">2.develop a rule</a>
 
 ```$xslt
 project: sonar-pmd-custom-rules
@@ -31,7 +52,7 @@ project: sonar-pmd-custom-rules
 2. add report err message in src\main\resources\messages.xml and messages_en.xml
 3. register rule in src\main\resources\rulesets\java\custom.xml
 ```
-# test your rule
+# 3.test your rule
 
 ```$xslt
 project: sonar-pmd-custom-rules
@@ -41,7 +62,7 @@ project: sonar-pmd-custom-rules
 3. edit your test case in test xml
 4. test it ! 
 ```
-# add rule in plugin
+# 4.add rule in plugin
 
 ```$xslt
 project: sonar-pmd-custom-rules
